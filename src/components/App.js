@@ -11,7 +11,7 @@ const App = () => {
   });
   const reset = () => {
     setRenderBall(false);
-    posiXY(0, 0);
+    updateXY(0, 0);
   };
 
   const start= () =>{ 
