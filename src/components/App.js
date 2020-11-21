@@ -10,62 +10,59 @@ const App = () => {
     top: "0px",
   });
   const reset = () => {
-    setRenderBall(false),
-    setX(0),
-    setY(0),
-    setBallPosition({
-      left: "0px",
-      top: "0px",
-    })
+    setRenderBall(false);
+    posiXY(0, 0);
   };
 
-  const start= () =>{setRenderBall(true);};
+  const start= () =>{ 
+    setRenderBall(true);
+  };
 
   const renderChoice = () => {
     return renderBall ? (
       <div className="ball" style={{
-        position: 'absolute',
+        position: "absolute",
         left: ballPosition.left,
-        top: ballPosition.top
-      }}></div>)
-      :(<button onClick={start} className="start"> Start</button>);
+        top: ballPosition.top,
+      }}></div>
+      ) : (<button onClick={start} className="start"> Start</button>);
   };
 
-  const posiXY =(newX, newY) =>{
+  const updateXY =(newX, newY) =>{
     setX(newX);
     setY(newY);
     setBallPosition({
-      left: newx+'px',
-      top: newY+'px',
+      left: newX+"px",
+      top: newY+"px",
     });
-  }
+  };
   useEffect(()=> {
-    const keyprsd =(evt) =>{
+    const keyListener =(evt) =>{
       console.log(" Key is pressed",renderBall, x, y);
       if(renderBall) {
         if(evt.keyCode === 37)
         {
-          posiXY(x-5, y);
+          updateXY(x-5, y);
         }
         else if(evt.keyCode === 38)
         {
-          posiXY(x, y-5);
+          updateXY(x, y-5);
         }
         else if(evt.keyCode === 39)
         {
-          posiXY(x+5, y);
+          updateXY(x+5, y);
         }
         else if(evt.keyCode === 40)
         {
-          posiXY(x, y+5);
+          updateXY(x, y+5);
         }
       }
     };
-    document.addEventListener("keydown", keyprsd);
+    document.addEventListener("keydown", keyListener);
 
     //cleanup of function
 
-    return ()=> document.removeEventListener("keydown", keyprsd);
+    return ()=> document.removeEventListener("keydown", keyListener);
   });
 
   return (
